@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  username String @unique
+
+  email String @unique
+
+  password String
+
+  avatar String?
+
+  emojiAvatar String? @default("🙂")
+
+  bio String?
+
+  createdAt DateTime @default(now())
+
+  isVerified Boolean @default(false)
+
+  verifyCode String?
+
+  verifyExpires DateTime?
+
+
+  // восстановление пароля
+  resetCode String?
+
+  resetExpires DateTime?
+
+
+
+  // статус онлайн
+
+  online Boolean @default(false)
+
+  lastSeen DateTime?
+
+  chats1 Chat[] @relation("UserOne")
+
+  chats2 Chat[] @relation("UserTwo")
+
+  messages Message[]
+}
+
+model Chat {
+  id Int @id @default(autoincrement())
+
+  user1Id Int
+
+  user2Id Int
+
+  user1 User @relation("UserOne", fields: [user1Id], references: [id])
+
+  user2 User @relation("UserTwo", fields: [user2Id], references: [id])
+
+  messages Message[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+
+  chatId Int
+
+  senderId Int
+
+  text String @default("")
+
+  type String @default("text")
+
+  fileUrl String?
+
+  fileName String?
+
+  fileSize Int?
+
+  createdAt DateTime @default(now())
+
+  chat Chat @relation(fields: [chatId], references: [id])
+
+  status String @default("SENT")
+
+  sender User @relation(fields: [senderId], references: [id])
+}
