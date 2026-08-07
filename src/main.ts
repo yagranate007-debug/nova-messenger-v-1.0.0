@@ -24,12 +24,11 @@ async function bootstrap() {
 
     // CORS
 
- app.enableCors({
-  origin: [
-    "nova-messenger-frontend-v-100-production.up.railway.app",
-    "http://localhost:5173",
+app.enableCors({
+  origin:[
+    "https://nova-messenger-frontend-v-100-production.up.railway.app"
   ],
-  credentials: true,
+  credentials:true
 });
 
 
