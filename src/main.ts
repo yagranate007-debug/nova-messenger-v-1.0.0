@@ -24,12 +24,17 @@ async function bootstrap() {
 
     // CORS
 
-app.enableCors({
-  origin:[
-    "https://nova-messenger-frontend-v-100-production.up.railway.app"
-  ],
-  credentials:true
-});
+    app.enableCors({
+
+        origin:[
+            "https://nova-messenger.ru",
+            "https://nova-messenger-frontend-v-100-production.up.railway.app"
+        ],
+
+        credentials:true
+
+    });
+
 
 
     // UPLOADS
@@ -42,10 +47,11 @@ app.enableCors({
         ),
 
         {
-            prefix: "/uploads/"
+            prefix:"/uploads/"
         }
 
     );
+
 
 
     // SERVER
