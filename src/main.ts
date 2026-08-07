@@ -26,7 +26,7 @@ async function bootstrap() {
 
  app.enableCors({
   origin: [
-    "https://nova-messenger.vercel.app",
+    "nova-messenger-frontend-v-100-production.up.railway.app",
     "http://localhost:5173",
   ],
   credentials: true,

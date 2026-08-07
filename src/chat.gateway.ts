@@ -27,7 +27,7 @@ const sendingMessages = new Set<string>();
     cors:{
 
         origin:[
-            "http://localhost:5173",
+            "https://nova-messenger-frontend-v-100-production.up.railway.app",
             "https://nova-messenger.ru"
         ],
 
